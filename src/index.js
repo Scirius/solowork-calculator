@@ -13,14 +13,14 @@ class Calculator {
   }
   history() {}
   equals() {
-    console.log("equals clicked");
-    let calcToDo = calculatorScreen.innerHTML;
-    calcToDo.replace(/x/g, "*");
-    if (isNaN(eval(CalcTodo))) {
+    let calcTodo = calculatorScreen.innerHTML;
+    calcTodo = calcTodo.replace(/x/g, "*");
+    console.log(`equals clicked with ${calcTodo}`);
+    if (isNaN(eval(calcTodo))) {
       calculatorScreen.innerHTML = "Error: Not a number";
     } else {
+      calculatorScreen.innerHTML = "" + eval(calcTodo);
     }
-    calculatorScreen.innerHTML = eval(calcToDo);
   }
 
   clear() {}
