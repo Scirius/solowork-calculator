@@ -12,6 +12,7 @@ class Calculator {
     this._history = [];
     console.log(`Calculator initialized for ${cObj}`);
   }
+
   history(value) {
     this._history.push(value);
     console.log(`History: ${this._history}`);
