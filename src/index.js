@@ -14,9 +14,15 @@ class Calculator {
   history() {}
   equals() {
     console.log("equals clicked");
-
-    calculatorScreen.innerHTML = eval(calculatorScreen.innerHTML);
+    let calcToDo = calculatorScreen.innerHTML;
+    calcToDo.replace(/x/g, "*");
+    if (isNaN(eval(CalcTodo))) {
+      calculatorScreen.innerHTML = "Error: Not a number";
+    } else {
+    }
+    calculatorScreen.innerHTML = eval(calcToDo);
   }
+
   clear() {}
 }
 const calculatorScreen = document.querySelector("#calculator .screen");
