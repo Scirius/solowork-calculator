@@ -9,24 +9,44 @@
 class Calculator {
   constructor(cObj) {
     this._calcObj = cObj;
+    this._history = [];
     console.log(`Calculator initialized for ${cObj}`);
   }
-  history() {}
+  history(value) {
+    this._history.push(value);
+    console.log(`History: ${this._history}`);
+  }
+
+  evalErrors(evalExpr) {
+    try {
+      eval(evalExpr);
+    } catch (err) {
+      return true;
+    }
+    return false;
+  }
+
   equals() {
     let calcTodo = calculatorScreen.innerHTML;
     calcTodo = calcTodo.replace(/x/g, "*");
     console.log(`equals clicked with ${calcTodo}`);
-    if (isNaN(eval(calcTodo))) {
+    if (this.evalErrors(calcTodo)) {
       calculatorScreen.innerHTML = "Error: Not a number";
+      return;
     } else {
+      this.history(calcTodo);
       calculatorScreen.innerHTML = "" + eval(calcTodo);
     }
   }
 
-  clear() {}
+  clear() {
+    calculatorScreen.innerHTML = "";
+    this._history = [];
+  }
 }
 const calculatorScreen = document.querySelector("#calculator .screen");
-const equals = document.querySelector("#calculator .eval");
+const calculatorEquals = document.querySelector("#calculator .eval");
+const calculatorClear = document.querySelector("#calculator .clear");
 
 /**
  * This function below write the value of the pressed key on the screen
@@ -45,7 +65,6 @@ document.querySelectorAll("#calculator span").forEach((key) => {
   }
 });
 
-document.querySelector("#calculator .clear").addEventListener("click", () => (calculatorScreen.innerHTML = ""));
-
 var calculator = new Calculator("#calculator");
-equals.addEventListener("click", () => calculator.equals());
+calculatorEquals.addEventListener("click", () => calculator.equals());
+calculatorClear.addEventListener("click", () => calculator.clear());
